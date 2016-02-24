@@ -1,0 +1,25 @@
+{
+  "name": "zetta-mock-devices-server",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/landlessness/zetta-mock-devices-server.git"
+  },
+  "author": "Brian Mulloy <brian@landlessness.net> (http://landlessness.net/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/landlessness/zetta-mock-devices-server/issues"
+  },
+  "homepage": "https://github.com/landlessness/zetta-mock-devices-server",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "zetta": "~1.0.0-beta.6",
+    "zetta-led-mock-driver": "~0.9.0",
+    "zetta-photocell-mock-driver": "~0.6.0"
+  }
+}

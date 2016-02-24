@@ -1,15 +1,13 @@
-var argv = require('minimist')(process.argv.slice(2));
-
 var zetta = require('zetta');
 var LED = require('zetta-led-mock-driver');
 var Photocell = require('zetta-photocell-mock-driver');
 
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 
-var PORT = argv['p'] || 1337;
+var PORT = 1338;
 
 zetta()
-  .name('FirstName LastName')
+  .name('detroit')
   .use(LED)
   .use(Photocell)
   .use(duskToDawnLight)

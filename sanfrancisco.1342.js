@@ -11,7 +11,7 @@ zetta()
   .use(LED)
   .use(Photocell)
   .use(duskToDawnLight)
-  .link('http://hello.zettaapi.org/')
+  .link('http://demo.zettaapi.org/')
   .listen(PORT, function(){
      console.log('Zetta is running at http://127.0.0.1:', PORT);
 });

@@ -4,10 +4,10 @@ var Photocell = require('zetta-photocell-mock-driver');
 
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 
-var PORT = 1341;
+var PORT = 1344;
 
 zetta()
-  .name('neworleans')
+  .name('denver')
   .use(LED)
   .use(Photocell)
   .use(duskToDawnLight)

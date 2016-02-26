@@ -2,7 +2,8 @@ var zetta = require('zetta');
 var LED = require('zetta-led-mock-driver');
 var Photocell = require('zetta-photocell-mock-driver');
 var Security = require('zetta-security-mock-driver');
-
+var Door = require('zetta-door-mock-driver');
+// Add mock emergency buttons for calling police and fire
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 
 var PORT = 1338;
@@ -12,6 +13,7 @@ zetta()
   .use(LED)
   .use(Photocell)
   .use(Security)
+  .use(Door)
   .use(duskToDawnLight)
   .link('http://demo.zettaapi.org/')
   .listen(PORT, function(){

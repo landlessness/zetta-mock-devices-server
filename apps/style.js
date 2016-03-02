@@ -4,6 +4,28 @@ var DOOR_CLOSED_IMAGE_URL = 'https://cdn0.iconfinder.com/data/icons/mobile-devel
 var DOOR_OPENED_IMAGE_URL = 'https://cdn0.iconfinder.com/data/icons/mobile-development-svg-icons/60/open_door-512.png';
 
 module.exports = function(server) {
+  var photocellQuery = server.where({ type: 'photocell' });
+  server.observe([photocellQuery], function(photocell){
+    // add property to track style
+    photocell.style = {};
+    // wrap it in a WebSockets monitor
+    photocell._initMonitor('style');
+    photocell._monitors.push('style');
+    photocell.style.indicators = {
+      state: {display: 'none'},
+      intensity: {
+        display: 'billboard',
+        position: 0,
+        units: {
+          significantDigits: 3,
+          name: 'lux',
+          symbol: 'lx',
+	  quantity: 'illuminance'
+        }
+      }
+    };
+  });
+
   var doorSensorQuery = server.where({ type: 'door' });
   server.observe([doorSensorQuery], function(doorSensor){
     // add property to track style
@@ -21,6 +43,5 @@ module.exports = function(server) {
     doorSensor.on('force-mock-open', function(s) {
       doorSensor.style = extend(doorSensor.style, {stateImage: DOOR_OPENED_IMAGE_URL});
     });
-   }
-  );
+  });
 };

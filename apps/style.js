@@ -13,6 +13,7 @@ module.exports = function(server) {
     doorSensor._monitors.push('style');
     // set the default image
     doorSensor.style.stateImage = DOOR_CLOSED_IMAGE_URL;
+    doorSensor.style.defaultImage = DOOR_CLOSED_IMAGE_URL;
     // change the state image when door changes state
     doorSensor.on('force-mock-close', function(s) {
       doorSensor.style = extend(doorSensor.style, {stateImage: DOOR_CLOSED_IMAGE_URL});

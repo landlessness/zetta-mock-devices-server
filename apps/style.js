@@ -11,19 +11,26 @@ module.exports = function(server) {
     // wrap it in a WebSockets monitor
     photocell._initMonitor('style');
     photocell._monitors.push('style');
-    photocell.style.indicators = {
-      state: {display: 'none'},
-      intensity: {
+    photocell.style.displays = [
+      {
+        indicator: 'state',
+        display: 'none'
+      },
+      {
+	indicator: 'intensity',
         display: 'billboard',
-        position: 0,
-        units: {
-          significantDigits: 3,
-          name: 'lux',
-          symbol: 'lx',
-	  quantity: 'illuminance'
-        }
+        position: 10,
+        significantDigits: 3,
+        symbol: 'lx',
+      },
+      {
+        indicator: 'intensity',
+        display: 'lineChart',
+        position: 20,
+        significantDigits: 3,
+        symbol: 'lx',
       }
-    };
+    ]
   });
 
   var doorSensorQuery = server.where({ type: 'door' });

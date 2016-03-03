@@ -34,9 +34,9 @@ module.exports = function(server) {
   server.observe([doorSensorQuery], function(doorSensor){
     // add property to track style
     doorSensor.style = {};
-    // set the default image
     doorSensor.style.stateImage = DOOR_CLOSED_IMAGE_URL;
-    doorSensor.style.defaultImage = DOOR_CLOSED_IMAGE_URL;
+    // set the default image
+    doorSensor.style.typeImage = DOOR_CLOSED_IMAGE_URL;
     // change the state image when door changes state
     doorSensor.on('force-mock-close', function(s) {
       doorSensor.style = extend(doorSensor.style, {stateImage: DOOR_CLOSED_IMAGE_URL});

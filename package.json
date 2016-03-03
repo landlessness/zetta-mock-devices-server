@@ -22,6 +22,6 @@
     "zetta-led-mock-driver": "~0.9.0",
     "zetta-photocell-mock-driver": "~0.6.0",
     "zetta-security-mock-driver": "~0.0.1",
-    "zetta-door-mock-driver": "~0.0.1"
+    "zetta-door-mock-driver": "~0.0.2"
   }
 }

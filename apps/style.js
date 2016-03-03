@@ -8,9 +8,6 @@ module.exports = function(server) {
   server.observe([photocellQuery], function(photocell){
     // add property to track style
     photocell.style = {};
-    // wrap it in a WebSockets monitor
-    photocell._initMonitor('style');
-    photocell._monitors.push('style');
     photocell.style.displays = [
       {
         indicator: 'state',
@@ -37,9 +34,6 @@ module.exports = function(server) {
   server.observe([doorSensorQuery], function(doorSensor){
     // add property to track style
     doorSensor.style = {};
-    // wrap it in a WebSockets monitor
-    doorSensor._initMonitor('style');
-    doorSensor._monitors.push('style');
     // set the default image
     doorSensor.style.stateImage = DOOR_CLOSED_IMAGE_URL;
     doorSensor.style.defaultImage = DOOR_CLOSED_IMAGE_URL;

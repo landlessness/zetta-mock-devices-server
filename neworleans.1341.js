@@ -1,4 +1,5 @@
 var zetta = require('zetta');
+var heapdump = require('heapdump');
 var LED = require('zetta-led-mock-driver');
 var Photocell = require('zetta-photocell-mock-driver');
 var Door = require('zetta-door-mock-driver');

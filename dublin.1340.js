@@ -8,7 +8,7 @@ var PORT = 1340;
 
 zetta()
   .name('dublin')
-  .properties({style: {brandColors: {primary: {decimal: {red: 0, green: 255, blue: 0}, hex: '#00FF00'}}}})
+  .properties({style: {colors: {primary: {decimal: {red: 0, green: 155, blue: 72}, hex: '#009B48'}}}})
   .use(LED)
   .use(Photocell)
   .use(duskToDawnLight)

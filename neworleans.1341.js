@@ -10,7 +10,7 @@ var PORT = 1341;
 
 zetta()
   .name('neworleans')
-  .properties({style: {brandColors: {primary: {decimal: {red: 98, green: 147, blue: 187}, hex: '#622FBB'}}}})
+  .properties({style: {colors: {primary: {decimal: {red: 98, green: 47, blue: 187}, hex: '#622FBB'}}}})
   .use(LED)
   .use(Photocell)
   .use(Door)

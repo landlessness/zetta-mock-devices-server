@@ -11,7 +11,7 @@ var PORT = 1338;
 
 zetta()
   .name('detroit')
-  .properties({style: {brandColors: {primary: {decimal: {red: 0, green: 0, blue: 0}, hex: '#000'}}}})
+  .properties({style: {colors: {primary: {decimal: {red: 0, green: 32, blue: 94}, hex: '#00205E'}}}})
   .use(LED)
   .use(Photocell)
   .use(Security)

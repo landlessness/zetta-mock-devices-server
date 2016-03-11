@@ -1,5 +1,5 @@
 var zetta = require('zetta');
-var LED = require('zetta-led-mock-driver');
+var Light = require('zetta-light-mock-driver');
 var Photocell = require('zetta-photocell-mock-driver');
 
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
@@ -9,7 +9,7 @@ var PORT = 1339;
 zetta()
   .name('bangalore')
   .properties({style: {colors: {primary: {decimal: {red: 193, green: 80, blue: 32}, hex: '#C15020'}}}})
-  .use(LED)
+  .use(Light)
   .use(Photocell)
   .use(duskToDawnLight)
   .link('http://demo.zettaapi.org/')

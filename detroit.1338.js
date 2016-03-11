@@ -1,5 +1,5 @@
 var zetta = require('zetta');
-var LED = require('zetta-led-mock-driver');
+var Light = require('zetta-light-mock-driver');
 var Photocell = require('zetta-photocell-mock-driver');
 var Security = require('zetta-security-mock-driver');
 var Door = require('zetta-door-mock-driver');
@@ -12,7 +12,7 @@ var PORT = 1338;
 zetta()
   .name('detroit')
   .properties({style: {colors: {primary: {decimal: {red: 0, green: 32, blue: 94}, hex: '#00205E'}}}})
-  .use(LED)
+  .use(Light)
   .use(Photocell)
   .use(Security)
   .use(Door)

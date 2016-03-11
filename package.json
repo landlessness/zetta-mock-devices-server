@@ -19,7 +19,7 @@
   "dependencies": {
     "node.extend": "^1.1.5",
     "zetta": "~1.0.0-beta.6",
-    "zetta-led-mock-driver": "~0.9.0",
+    "zetta-light-mock-driver": "~0.0.1",
     "zetta-photocell-mock-driver": "~0.7.0",
     "zetta-security-mock-driver": "~0.0.2",
     "zetta-door-mock-driver": "~0.0.3",

@@ -23,6 +23,7 @@
     "zetta-photocell-mock-driver": "~0.7.0",
     "zetta-security-mock-driver": "~0.0.3",
     "zetta-door-mock-driver": "~0.0.4",
+    "zetta-thermometer-mock-driver": "~0.0.1",
     "heapdump": "~0.3.7"
   }
 }

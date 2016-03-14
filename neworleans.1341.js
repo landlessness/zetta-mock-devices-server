@@ -3,6 +3,7 @@ var heapdump = require('heapdump');
 var Light = require('zetta-light-mock-driver');
 var Photocell = require('zetta-photocell-mock-driver');
 var Door = require('zetta-door-mock-driver');
+var Thermometer = require('zetta-thermometer-mock-driver');
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 var style = require('./apps/style');
 
@@ -14,6 +15,7 @@ zetta()
   .use(Light)
   .use(Photocell)
   .use(Door)
+  .use(Thermometer)
   .use(duskToDawnLight)
   .use(style)
   .link('http://demo.zettaapi.org/')

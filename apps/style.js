@@ -31,6 +31,34 @@ module.exports = function(server) {
       stateStream.on('data', function(newState) {
         device.call('update-state-image', stateImageForDevice(device));
       });
+
+      var hideUpdateStateImageAction = {
+        action: 'update-state-image',
+        display: 'none'
+      };
+      if (typeof device.style.actions === 'undefined' || device.style.actions.constructor !== Array) {
+        device.style.actions = [hideUpdateStateImageAction];
+      } else {
+        device.style.actions.push(hideUpdateStateImageAction);
+      }
+      
     });
+  });
+  
+  var photocellQuery = server.where({ type: 'photocell' });
+  server.observe([photocellQuery], function(photocell){
+    // add property to track style
+    photocell.style.properties = [
+      {
+        property: 'intensity',
+        display: 'billboard',
+        significantDigits: 3,
+        symbol: 'lx'
+      },
+      {
+        property: 'stateImage',
+        display: 'none'
+      }
+    ];
   });
 }

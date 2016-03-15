@@ -8,7 +8,10 @@ var PORT = 1342;
 
 zetta()
   .name('sanfrancisco')
-  .properties({style: {colors: {primary: {decimal: {red: 255, green: 215, blue: 0}, hex: '#FFD700'}}}})
+  .properties({ style: 
+    { 
+      foregroundColor: {decimal: {red: 255, green: 215, blue: 0}, hex: '#FFD700'}
+    }})
   .use(Light)
   .use(Photocell)
   .use(duskToDawnLight)

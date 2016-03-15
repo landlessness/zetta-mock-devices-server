@@ -11,7 +11,10 @@ var PORT = 1339;
 
 zetta()
   .name('bangalore')
-  .properties({style: {colors: {primary: {decimal: {red: 193, green: 80, blue: 32}, hex: '#C15020'}}}})
+  .properties({ style: 
+    { 
+      foregroundColor: {decimal: {red: 193, green: 80, blue: 32}, hex: '#C15020'}
+    }})
   .use(Light)
   .use(Photocell)
   .use(Security)

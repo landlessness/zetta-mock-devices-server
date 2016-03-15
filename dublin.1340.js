@@ -9,7 +9,11 @@ var PORT = 1340;
 
 zetta()
   .name('dublin')
-  .properties({style: {colors: {primary: {decimal: {red: 0, green: 155, blue: 72}, hex: '#009B48'}}}})
+  .properties({ style: 
+      { 
+        backgroundColor: {decimal: {red: 0, green: 155, blue: 72}, hex: '#009B48'},
+        foregroundColor: {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'}
+      }})
   .use(Light)
   .use(Photocell)
   .use(style)

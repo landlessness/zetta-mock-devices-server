@@ -15,7 +15,20 @@ zetta()
   .properties({ style: 
     { 
       backgroundColor: {decimal: {red: 0, green: 35, blue: 80}, hex: '#002350'},
-      foregroundColor: {decimal: {red: 255, green: 202, blue: 0}, hex: '#FFCA00'}
+      foregroundColor: {decimal: {red: 255, green: 202, blue: 0}, hex: '#FFCA00'},
+      devices: [{
+        photocell: {
+          properties: [{
+            property: 'state',
+            display: 'none'
+          },{
+            property: 'intensity',
+            display: 'inline',
+            significantDigits: 3,
+            symbol: 'lx'
+          }]
+        }
+      }]
     }})
   .use(Light)
   .use(Photocell)

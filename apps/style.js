@@ -48,9 +48,6 @@ module.exports = function(server) {
   var photocellQuery = server.where({ type: 'photocell' });
   server.observe([photocellQuery], function(photocell){
     // add property to track style
-    photocell.style.backgroundColor = {decimal: {red: 0, green: 35, blue: 80}, hex: '#002350'};
-    photocell.style.foregroundColor = {decimal: {red: 255, green: 202, blue: 0}, hex: '#FFCA00'};
-    
     photocell.style.properties = [
       {
         property: 'intensity',
@@ -64,4 +61,12 @@ module.exports = function(server) {
       }
     ];
   });
+
+  var securityQuery = server.where({ type: 'security' });
+  server.observe([securityQuery], function(security){
+    // add property to track style
+    security.style.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
+    security.style.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
+  });
+
 }

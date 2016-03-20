@@ -1,6 +1,7 @@
 var zetta = require('zetta');
 var Light = require('zetta-light-mock-driver');
 var Photocell = require('zetta-photocell-mock-driver');
+var Camera = require('zetta-camera-mock-driver');
 
 var style = require('./apps/style');
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
@@ -16,6 +17,7 @@ zetta()
       }})
   .use(Light)
   .use(Photocell)
+  .use(Camera)
   .use(style)
   .use(duskToDawnLight)
   .link('http://demo.zettaapi.org/')

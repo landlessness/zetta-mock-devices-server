@@ -3,13 +3,17 @@ var extend = require('node.extend');
 
 var IMAGE_URL_ROOT = 'http://www.zettaapi.org/icons/';
 var IMAGE_EXTENSION = '.png';
+var DETROIT_IMAGE = 'http://www.zettaapi.org/public/demo/detroit.jpg';
+var DUBLIN_IMAGE = 'http://www.zettaapi.org/public/demo/dublin.jpg';
 
 var stateImageForDevice = function(device) {
   return IMAGE_URL_ROOT + device.type + '-' + device.state + IMAGE_EXTENSION;
 }
 
 module.exports = function(server) {
-  ['security', 'door', 'photocell', 'light'].forEach(function(deviceType){
+  console.log('util.inspect(server): ' + util.inspect(server));
+
+  ['security', 'door', 'photocell', 'light', 'thermometer', 'camera'].forEach(function(deviceType){
     var deviceQuery = server.where({ type: deviceType});
     server.observe([deviceQuery], function(device) {
       var states = Object.keys(device._allowed);
@@ -18,7 +22,7 @@ module.exports = function(server) {
       }
       device._transitions['update-state-image'] = {
         handler: function(updatedStateImage, cb) {
-          this.style = extend(this.style, {stateImage: updatedStateImage});
+          device.style = extend(device.style, {stateImage: updatedStateImage});
           cb();
         },
         fields: [
@@ -42,6 +46,16 @@ module.exports = function(server) {
         device.style.actions.push(hideUpdateStateImageAction);
       }
       
+      if (deviceType === 'camera') {
+        switch (server.httpServer.zetta._name) {
+        case 'detroit':
+          device.call('update-state-image', DETROIT_IMAGE);
+          break;
+        case 'dublin':
+          device.call('update-state-image', DUBLIN_IMAGE);
+          break;
+        }
+      }
     });
   });
   

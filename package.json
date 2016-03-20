@@ -24,6 +24,7 @@
     "zetta-security-mock-driver": "~0.0.3",
     "zetta-door-mock-driver": "~0.0.4",
     "zetta-thermometer-mock-driver": "~0.0.1",
+    "zetta-camera-mock-driver": "~0.0.1",
     "heapdump": "~0.3.7"
   }
 }

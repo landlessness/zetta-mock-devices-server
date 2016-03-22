@@ -3,8 +3,6 @@ var extend = require('node.extend');
 
 var IMAGE_URL_ROOT = 'http://www.zettaapi.org/icons/';
 var IMAGE_EXTENSION = '.png';
-var DETROIT_IMAGE = 'http://www.zettaapi.org/public/demo/detroit.jpg';
-var DUBLIN_IMAGE = 'http://www.zettaapi.org/public/demo/dublin.jpg';
 
 var stateImageForDevice = function(device) {
   return IMAGE_URL_ROOT + device.type + '-' + device.state + IMAGE_EXTENSION;
@@ -46,16 +44,6 @@ module.exports = function(server) {
         device.style.actions.push(hideUpdateStateImageAction);
       }
       
-      if (deviceType === 'camera') {
-        switch (server.httpServer.zetta._name) {
-        case 'detroit':
-          device.call('update-state-image', DETROIT_IMAGE);
-          break;
-        case 'dublin':
-          device.call('update-state-image', DUBLIN_IMAGE);
-          break;
-        }
-      }
     });
   });
   

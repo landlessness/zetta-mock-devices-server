@@ -5,6 +5,7 @@ var Security = require('zetta-security-mock-driver');
 var Door = require('zetta-door-mock-driver');
 var Thermometer = require('zetta-thermometer-mock-driver');
 var Camera = require('zetta-camera-mock-driver');
+var Robot = require('zetta-robot-mock-driver');
 // Add mock emergency buttons for calling police and fire
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 var style = require('./apps/style');
@@ -37,6 +38,7 @@ zetta()
   .use(Door)
   .use(Thermometer)
   .use(Camera)
+  .use(Robot)
   .use(duskToDawnLight)
   .use(style)
   .link('http://demo.zettaapi.org/')

@@ -67,11 +67,13 @@ module.exports = function(server) {
     ];
   });
 
-  var securityQuery = server.where({ type: 'security' });
-  server.observe([securityQuery], function(security){
-    // add property to track style
-    security.style.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
-    security.style.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
-  });
+  if (server.httpServer.zetta._name === 'denver') {
+    var securityQuery = server.where({ type: 'security' });
+    server.observe([securityQuery], function(security){
+      // add property to track style
+      security.style.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
+      security.style.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
+    });
+  }
 
 }

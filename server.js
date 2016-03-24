@@ -6,12 +6,15 @@ var Door = require('zetta-door-mock-driver');
 var Thermometer = require('zetta-thermometer-mock-driver');
 var Camera = require('zetta-camera-mock-driver');
 var Robot = require('zetta-robot-mock-driver');
-// Add mock emergency buttons for calling police and fire
+// TODO: Add mock emergency buttons for calling police and fire
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 var style = require('./apps/style');
 
+var extend = require('node.extend');
+
 var SERVER_NAME = process.argv[2]
 var PORT = process.argv[3];
+var LINK_URL = process.argv[4];
 
 var parseCommandLineColor = function(colorString) {
   colorValues = colorString.split(':');
@@ -23,19 +26,9 @@ var parseCommandLineColor = function(colorString) {
     },
     hex: colorValues[3]
   };
-}
+};
 
-var FOREGROUND_COLOR = parseCommandLineColor(process.argv[4]);
-var BACKGROUND_COLOR = parseCommandLineColor(process.argv[5]);
-
-var LINK_URL = process.argv[6];
-
-zetta()
-  .name(SERVER_NAME)
-  .properties({ style: 
-    { 
-      foregroundColor: FOREGROUND_COLOR,
-      backgroundColor: BACKGROUND_COLOR,
+var styleProperties = { 
       devices: [{
         photocell: {
           properties: [{
@@ -49,7 +42,18 @@ zetta()
           }]
         }
       }]
-    }})
+    };
+
+if (process.argv[5]) {
+  styleProperties = extend(styleProperties, {foregroundColor: parseCommandLineColor(process.argv[5])});
+  if (process.argv[6]) {
+    styleProperties = extend(styleProperties, {backgroundColor: parseCommandLineColor(process.argv[6])});
+  }
+}
+
+zetta()
+  .name(SERVER_NAME)
+  .properties({style: styleProperties})
   .use(Light)
   .use(Photocell)
   .use(Security)
@@ -65,5 +69,25 @@ zetta()
 });
 
 
-// node server.js detroit 1337 255:202:0:#FFCA00 0:35:80:#002350 http://dev.zettaapi.org
-// pm2 start server.js --name detroit -- detroit 1337 255:202:0:#FFCA00 0:35:80:#002350 http://dev.zettaapi.org
+// node server.js detroit 1370 255:202:0:#FFCA00 0:35:80:#002350 http://dev.zettaapi.org
+
+// BANGALORE
+// pm2 start server.js --name stage.bangalore.1371 -- bangalore 1371 http://stage.zettaapi.org 193:80:32:#C15020
+
+// DENVER
+// pm2 start server.js --name stage.denver.1372 -- denver 1372 http://stage.zettaapi.org
+
+// DETROIT
+// pm2 start server.js --name stage.detroit.1373 -- detroit http://stage.zettaapi.org 1373 255:202:0:#FFCA00 0:35:80:#002350 
+
+// DUBLIN
+// pm2 start server.js --name stage.dublin.1374 -- dublin http://stage.zettaapi.org 1374 255:255:255:#FFFFFF 0:155:72:#009B48
+
+// NEW ORLEANS
+// pm2 start server.js --name stage.neworleans.1375 -- neworleans http://stage.zettaapi.org 1375 98:47:187:#622FBB
+
+// SAN FRANCISCO
+// pm2 start server.js --name stage.sanfrancisco.1376 -- sanfrancisco http://stage.zettaapi.org 1376 255:215:0:#FFD700
+
+// SINGAPORE
+// pm2 start server.js --name stage.singapore.1377 -- singapore http://stage.zettaapi.org 1377 

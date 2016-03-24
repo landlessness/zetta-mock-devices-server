@@ -11,31 +11,36 @@ var stateImageForDevice = function(device) {
 module.exports = function(server) {
   console.log('util.inspect(server): ' + util.inspect(server));
 
+  // TODO: swap with server.ql and text
   ['security', 'door', 'photocell', 'light', 'thermometer', 'camera', 'robot'].forEach(function(deviceType){
-    var deviceQuery = server.where({ type: deviceType});
+    var deviceQuery = server.where({type: deviceType});
     server.observe([deviceQuery], function(device) {
       var states = Object.keys(device._allowed);
       for (i = 0; i < states.length; i++) {
-        device._allowed[states[i]].push('update-state-image');
+        device._allowed[states[i]].push('_update-state-image');
       }
-      device._transitions['update-state-image'] = {
-        handler: function(updatedStateImage, cb) {
-          device.style = extend(device.style, {stateImage: updatedStateImage});
+      device._transitions['_update-state-image'] = {
+        handler: function(imageURL, tintMode, cb) {
+          if (tintMode !== 'original') {
+            tintMode = 'template';
+          }
+          device.style = extend(device.style, {stateImage: {url: imageURL, tintMode: tintMode}});
           cb();
         },
         fields: [
-          {name: 'image', type: 'text'}
+          {name: 'imageURL', type: 'text'},
+          {name: 'tintMode', type: 'text'}
         ]
       };
 
-      device.call('update-state-image', stateImageForDevice(device));
+      device.call('_update-state-image', stateImageForDevice(device), 'template');
       var stateStream = device.createReadStream('state');
       stateStream.on('data', function(newState) {
-        device.call('update-state-image', stateImageForDevice(device));
+        device.call('_update-state-image', stateImageForDevice(device), 'template');
       });
 
       var hideUpdateStateImageAction = {
-        action: 'update-state-image',
+        action: '_update-state-image',
         display: 'none'
       };
       if (typeof device.style.actions === 'undefined' || device.style.actions.constructor !== Array) {

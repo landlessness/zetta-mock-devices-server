@@ -10,14 +10,30 @@ var Robot = require('zetta-robot-mock-driver');
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 var style = require('./apps/style');
 
-var PORT = 1338;
+var SERVER_NAME = process.argv[2]
+var PORT = process.argv[3];
+
+var parseCommandLineColor = function(colorString) {
+  colorValues = colorString.split(':');
+  return {
+    decimal: {
+      red: colorValues[0],
+      green: colorValues[1],
+      blue: colorValues[2]
+    },
+    hex: colorValues[3]
+  };
+}
+
+var FOREGROUND_COLOR = parseCommandLineColor(process.argv[4]);
+var BACKGROUND_COLOR = parseCommandLineColor(process.argv[5]);
 
 zetta()
-  .name('detroit')
+  .name(SERVER_NAME)
   .properties({ style: 
     { 
-      backgroundColor: {decimal: {red: 0, green: 35, blue: 80}, hex: '#002350'},
-      foregroundColor: {decimal: {red: 255, green: 202, blue: 0}, hex: '#FFCA00'},
+      foregroundColor: FOREGROUND_COLOR,
+      backgroundColor: BACKGROUND_COLOR,
       devices: [{
         photocell: {
           properties: [{
@@ -43,5 +59,9 @@ zetta()
   .use(style)
   .link('http://demo.zettaapi.org/')
   .listen(PORT, function(){
-     console.log('Zetta is running at http://127.0.0.1:' + PORT);
+     console.log('Zetta server ' + SERVER_NAME + ' is running at http://127.0.0.1:' + PORT);
 });
+
+
+// node server.js detroit 1337 255:202:0:#FFCA00 0:35:80:#002350
+// pm2 start server.js --name detroit -- detroit 1337 255:202:0:#FFCA00 0:35:80:#002350

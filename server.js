@@ -28,6 +28,8 @@ var parseCommandLineColor = function(colorString) {
 var FOREGROUND_COLOR = parseCommandLineColor(process.argv[4]);
 var BACKGROUND_COLOR = parseCommandLineColor(process.argv[5]);
 
+var LINK_URL = process.argv[6];
+
 zetta()
   .name(SERVER_NAME)
   .properties({ style: 
@@ -57,11 +59,11 @@ zetta()
   .use(Robot)
   .use(duskToDawnLight)
   .use(style)
-  .link('http://demo.zettaapi.org/')
+  .link(LINK_URL)
   .listen(PORT, function(){
      console.log('Zetta server ' + SERVER_NAME + ' is running at http://127.0.0.1:' + PORT);
 });
 
 
-// node server.js detroit 1337 255:202:0:#FFCA00 0:35:80:#002350
-// pm2 start server.js --name detroit -- detroit 1337 255:202:0:#FFCA00 0:35:80:#002350
+// node server.js detroit 1337 255:202:0:#FFCA00 0:35:80:#002350 http://dev.zettaapi.org
+// pm2 start server.js --name detroit -- detroit 1337 255:202:0:#FFCA00 0:35:80:#002350 http://dev.zettaapi.org

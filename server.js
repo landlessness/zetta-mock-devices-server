@@ -11,10 +11,12 @@ var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 var style = require('./apps/style');
 
 var extend = require('node.extend');
+var argv = require('minimist')(process.argv.slice(2));
+console.log(argv);
 
-var SERVER_NAME = process.argv[2]
-var PORT = process.argv[3];
-var LINK_URL = process.argv[4];
+var SERVER_NAME = argv['s'];
+var PORT = argv['p'];
+var LINK_URL = argv['l'];
 
 var parseCommandLineColor = function(colorString) {
   colorValues = colorString.split(':');
@@ -44,12 +46,10 @@ var styleProperties = {
       }]
     };
 
-if (process.argv[5]) {
-  styleProperties = extend(styleProperties, {foregroundColor: parseCommandLineColor(process.argv[5])});
-  if (process.argv[6]) {
-    styleProperties = extend(styleProperties, {backgroundColor: parseCommandLineColor(process.argv[6])});
-  }
-}
+styleProperties = extend(styleProperties, {foregroundColor: parseCommandLineColor(argv['f'])});
+styleProperties = extend(styleProperties, {backgroundColor: parseCommandLineColor(argv['b'])});
+
+var cameraImage = argv['c'];
 
 zetta()
   .name(SERVER_NAME)
@@ -59,7 +59,7 @@ zetta()
   .use(Security)
   .use(Door)
   .use(Thermometer)
-  .use(Camera)
+  .use(Camera, cameraImage)
   .use(Robot)
   .use(duskToDawnLight)
   .use(style)
@@ -72,22 +72,22 @@ zetta()
 // node server.js detroit 1370 255:202:0:#FFCA00 0:35:80:#002350 http://dev.zettaapi.org
 
 // BANGALORE
-// pm2 start server.js --name stage.bangalore.1371 -- bangalore 1371 http://stage.zettaapi.org 193:80:32:#C15020
+// pm2 start server.js --force --name stage.bangalore.1371 -- -s bangalore -p 1371 -l http://stage.zettaapi.org -f 193:80:32:#C15020
 
 // DENVER
-// pm2 start server.js --name stage.denver.1372 -- denver 1372 http://stage.zettaapi.org
+// pm2 start server.js --force --name stage.denver.1372 -- -s denver -p 1372 -l http://stage.zettaapi.org
 
 // DETROIT
-// pm2 start server.js --name stage.detroit.1373 -- detroit http://stage.zettaapi.org 1373 255:202:0:#FFCA00 0:35:80:#002350 
+// pm2 start server.js --force --name stage.detroit.1373 -- -s detroit -p 1373 -l http://stage.zettaapi.org -f 255:202:0:#FFCA00 -b 0:35:80:#002350 -c http://www.zettaapi.org/public/demo/detroit.jpg
 
 // DUBLIN
-// pm2 start server.js --name stage.dublin.1374 -- dublin http://stage.zettaapi.org 1374 255:255:255:#FFFFFF 0:155:72:#009B48
+// pm2 start server.js --force --name stage.dublin.1374 -- -s dublin -l http://stage.zettaapi.org -p 1374 -f 255:255:255:#FFFFFF -b 0:155:72:#009B48 -c http://www.zettaapi.org/public/demo/dublin.jpg
 
 // NEW ORLEANS
-// pm2 start server.js --name stage.neworleans.1375 -- neworleans http://stage.zettaapi.org 1375 98:47:187:#622FBB
+// pm2 start server.js --force --name stage.neworleans.1375 -- -s neworleans -l http://stage.zettaapi.org -p 1375 -f 98:47:187:#622FBB
 
 // SAN FRANCISCO
-// pm2 start server.js --name stage.sanfrancisco.1376 -- sanfrancisco http://stage.zettaapi.org 1376 255:215:0:#FFD700
+// pm2 start server.js --force --name stage.sanfrancisco.1376 -- -s sanfrancisco -l http://stage.zettaapi.org -p 1376 -f 255:215:0:#FFD700
 
 // SINGAPORE
-// pm2 start server.js --name stage.singapore.1377 -- singapore http://stage.zettaapi.org 1377 
+// pm2 start server.js --force --name stage.singapore.1377 -- -s singapore -l http://stage.zettaapi.org -p 1377 

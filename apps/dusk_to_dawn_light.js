@@ -3,7 +3,7 @@ module.exports = function(server) {
   var lightQuery = server.where({ type: 'light' });
   server.observe([photocellQuery, lightQuery], function(photocell, light){
     photocell.streams.intensity.on('data', function(m) {
-      if(m.data < 0.5) {
+      if(m.data < 1.0) {
         if (light.available('turn-on')) {
           light.call('turn-on');
         }

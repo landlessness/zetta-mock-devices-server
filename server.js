@@ -21,9 +21,9 @@ var parseCommandLineColor = function(colorString) {
   colorValues = colorString.split(':');
   return {
     decimal: {
-      red: colorValues[0],
-      green: colorValues[1],
-      blue: colorValues[2]
+      red: Number(colorValues[0]),
+      green: Number(colorValues[1]),
+      blue: Number(colorValues[2])
     },
     hex: colorValues[3]
   };
@@ -83,7 +83,7 @@ zetta()
 // pm2 start server.js  --name stage.denver.1372 -- -s denver -p 1372 -l http://stage.zettaapi.org -f 248:86:17:#F85611 -b 0:30:72:#001E48 -c http://www.zettaapi.org/public/demo/denver.jpg -i 5 -t 0.25
 
 // DETROIT
-// pm2 start server.js  --name stage.detroit.1373 -- -s detroit -p 1373 -l http://stage.zettaapi.org -f 0:80:154:#00509A -b 171:182:191:#ABB6BF -c http://www.zettaapi.org/public/demo/detroit.jpg -i 5 -t 0.25
+// pm2 start server.js  --name stage.detroit.1373 -- -s detroit -p 1373 -l http://stage.zettaapi.org -b 0:80:154:#00509A -f 171:182:191:#ABB6BF -c http://www.zettaapi.org/public/demo/detroit.jpg -i 5 -t 0.25
 
 // ANN ARBOR
 // pm2 start server.js  --name stage.annarbor.1373 -- -s annarbor -p 1373 -l http://stage.zettaapi.org -f 255:191:0:#FFBF00 -b 0:30:60:#001E3C -c http://www.zettaapi.org/public/demo/annarbor.jpg -i 5 -t 0.25

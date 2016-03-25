@@ -95,7 +95,7 @@ zetta()
 // pm2 start server.js  --name stage.neworleans.1375 -- -s neworleans -l http://stage.zettaapi.org -p 1375 -f 98:47:187:#622FBB -c http://www.zettaapi.org/public/demo/neworleans.jpg -i 5 -t 0.25
 
 // SAN FRANCISCO
-// pm2 start server.js  --name stage.sanfrancisco.1376 -- -s sanfrancisco -l http://stage.zettaapi.org -p 1376 -f 182:136:56:#B68838 -b 194:0:18:#C20012 -c http://www.zettaapi.org/public/demo/sanfrancisco.jpg -i 5 -t 0.25
+// pm2 start server.js  --name stage.sanfrancisco.1376 -- -s sanfrancisco -l http://stage.zettaapi.org -p 1376 -b 182:136:56:#B68838 -f 194:0:18:#C20012 -c http://www.zettaapi.org/public/demo/sanfrancisco.jpg -i 5 -t 0.25
 
 // SINGAPORE
 // pm2 start server.js  --name stage.singapore.1377 -- -s singapore -l http://stage.zettaapi.org -p 1377 -c http://www.zettaapi.org/public/demo/singapore.jpg -i 5 -t 0.25

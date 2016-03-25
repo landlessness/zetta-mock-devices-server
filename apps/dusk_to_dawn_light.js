@@ -1,15 +1,15 @@
 module.exports = function(server) {
   var photocellQuery = server.where({ type: 'photocell' });
-  var ledQuery = server.where({ type: 'led' });
-  server.observe([photocellQuery, ledQuery], function(photocell, led){
+  var lightQuery = server.where({ type: 'light' });
+  server.observe([photocellQuery, lightQuery], function(photocell, light){
     photocell.streams.intensity.on('data', function(m) {
       if(m.data < 0.5) {
-        if (led.available('turn-on')) {
-          led.call('turn-on');
+        if (light.available('turn-on')) {
+          light.call('turn-on');
         }
       } else {
-        if (led.available('turn-off')) {
-          led.call('turn-off');
+        if (light.available('turn-off')) {
+          light.call('turn-off');
        }
      }
    });

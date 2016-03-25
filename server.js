@@ -1,6 +1,6 @@
 var zetta = require('zetta');
 var Light = require('zetta-light-mock-driver');
-var Photocell = require('zetta-photocell-mock-driver');
+var Photocell = require('zetta-photocell-stateful-mock-driver');
 var Security = require('zetta-security-mock-driver');
 var Door = require('zetta-door-mock-driver');
 var Thermometer = require('zetta-thermometer-mock-driver');
@@ -12,7 +12,6 @@ var style = require('./apps/style');
 
 var extend = require('node.extend');
 var argv = require('minimist')(process.argv.slice(2));
-console.log(argv);
 
 var SERVER_NAME = argv['s'];
 var PORT = argv['p'];
@@ -55,11 +54,13 @@ if (argv['b']) {
 
 var cameraImage = argv['c'];
 
+var photoCellIncrement = argv['i'];
+
 zetta()
   .name(SERVER_NAME)
   .properties({style: styleProperties})
   .use(Light)
-  .use(Photocell)
+  .use(Photocell, {increment: photoCellIncrement})
   .use(Security)
   .use(Door)
   .use(Thermometer)
@@ -82,7 +83,7 @@ zetta()
 // pm2 start server.js  --name stage.denver.1372 -- -s denver -p 1372 -l http://stage.zettaapi.org -f 248:86:17:#F85611 -b 0:30:72:#001E48 -c http://www.zettaapi.org/public/demo/denver.jpg
 
 // DETROIT
-// pm2 start server.js  --name stage.detroit.1373 -- -s detroit -p 1373 -l http://stage.zettaapi.org -f 0:80:154:#00509A -b 171:182:191:#ABB6BF -c http://www.zettaapi.org/public/demo/detroit.jpg
+// pm2 start server.js  --name stage.detroit.1373 -- -s detroit -p 1373 -l http://stage.zettaapi.org -f 0:80:154:#00509A -b 171:182:191:#ABB6BF -c http://www.zettaapi.org/public/demo/detroit.jpg -i 1
 
 // ANN ARBOR
 // pm2 start server.js  --name stage.annarbor.1373 -- -s annarbor -p 1373 -l http://stage.zettaapi.org -f 255:191:0:#FFBF00 -b 0:30:60:#001E3C -c http://www.zettaapi.org/public/demo/annarbor.jpg

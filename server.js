@@ -46,8 +46,12 @@ var styleProperties = {
       }]
     };
 
-styleProperties = extend(styleProperties, {foregroundColor: parseCommandLineColor(argv['f'])});
-styleProperties = extend(styleProperties, {backgroundColor: parseCommandLineColor(argv['b'])});
+if (argv['f']) {
+  styleProperties = extend(styleProperties, {foregroundColor: parseCommandLineColor(argv['f'])});
+}
+if (argv['b']) {
+  styleProperties = extend(styleProperties, {backgroundColor: parseCommandLineColor(argv['b'])});
+}
 
 var cameraImage = argv['c'];
 

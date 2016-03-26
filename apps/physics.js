@@ -20,21 +20,25 @@ module.exports = function(server) {
       }
       switch (newState.data) {
       case 'opening-door':
+        // a reed switch opens as soon as opening begins
         if (door.available('open')) {
           door.call('open');
         }
         break;
-      case 'closing-door':
+      case 'finished-closing-door':
+        // but a reed switch closes only after closing is complete
         if (door.available('close')) {
           door.call('close');
         }
         break;
       case 'opening-window':
+        // a reed switch opens as soon as opening begins
         if (window.available('open')) {
           window.call('open');
         }
         break;
-      case 'closing-window':
+      case 'finished-closing-window':
+        // but a reed switch closes only after closing is complete
         if (window.available('close')) {
           window.call('close');
         }

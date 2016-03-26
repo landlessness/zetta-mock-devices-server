@@ -28,7 +28,7 @@
     "zetta-motion-mock-driver": "~0.0.1",
     "zetta-thermometer-mock-driver": "~0.0.2",
     "zetta-camera-mock-driver": "~0.0.2",
-    "zetta-robot-mock-driver": "~0.0.6",
+    "zetta-robot-mock-driver": "~0.0.7",
     "heapdump": "~0.3.7"
   }
 }

@@ -8,9 +8,9 @@ var Motion = require('zetta-motion-mock-driver');
 var Thermometer = require('zetta-thermometer-mock-driver');
 var Camera = require('zetta-camera-mock-driver');
 var Robot = require('zetta-robot-mock-driver');
-// TODO: Add mock emergency buttons for calling police and fire
-var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 
+// Little Apps
+// var duskToDawnLight = require('./apps/dusk_to_dawn_light');
 var style = require('./apps/style');
 var physics = require('./apps/physics');
 
@@ -72,7 +72,7 @@ zetta()
   .use(Thermometer, {increment: thermometerIncrement})
   .use(Camera, cameraImage)
   .use(Robot)
-  .use(duskToDawnLight)
+  // .use(duskToDawnLight)
   .use(style)
   .use(physics)
   .link(LINK_URL)

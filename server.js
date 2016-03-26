@@ -3,19 +3,22 @@ var Light = require('zetta-light-mock-driver');
 var Photocell = require('zetta-photocell-stateful-mock-driver');
 var Security = require('zetta-security-mock-driver');
 var Door = require('zetta-door-mock-driver');
+var Window = require('zetta-window-mock-driver');
 var Thermometer = require('zetta-thermometer-mock-driver');
 var Camera = require('zetta-camera-mock-driver');
 var Robot = require('zetta-robot-mock-driver');
 // TODO: Add mock emergency buttons for calling police and fire
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
+
 var style = require('./apps/style');
+var physics = require('./apps/physics');
 
 var extend = require('node.extend');
 var argv = require('minimist')(process.argv.slice(2));
 
-var SERVER_NAME = argv['s'];
-var PORT = argv['p'];
-var LINK_URL = argv['l'];
+var SERVER_NAME = argv['s'] || 'mock devices';
+var PORT = argv['p'] || 1337;
+var LINK_URL = argv['l'] || 'http://dev.zettaapi.org';
 
 var parseCommandLineColor = function(colorString) {
   colorValues = colorString.split(':');
@@ -54,8 +57,8 @@ if (argv['b']) {
 
 var cameraImage = argv['c'];
 
-var photoCellIncrement = argv['i'];
-var thermometerIncrement = argv['t'];
+var photoCellIncrement = argv['i'] || 5;
+var thermometerIncrement = argv['t'] || 1;
 zetta()
   .name(SERVER_NAME)
   .properties({style: styleProperties})
@@ -63,11 +66,13 @@ zetta()
   .use(Photocell, {increment: photoCellIncrement})
   .use(Security)
   .use(Door)
+  .use(Window)
   .use(Thermometer, {increment: thermometerIncrement})
   .use(Camera, cameraImage)
   .use(Robot)
   .use(duskToDawnLight)
   .use(style)
+  .use(physics)
   .link(LINK_URL)
   .listen(PORT, function(){
      console.log('Zetta server ' + SERVER_NAME + ' is running at http://127.0.0.1:' + PORT);

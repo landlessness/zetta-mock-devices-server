@@ -8,14 +8,13 @@ module.exports = function(server) {
   server.observe([robotQuery, doorQuery, windowQuery, motionQuery], function(robot, door, window, motion){
     var stateStream = robot.createReadStream('state');
     stateStream.on('data', function(newState) {
-      console.log('newState: ' + util.inspect(newState));
       if (newState.data === 'standing' || newState.data === 'sitting') {
-        if (motion.available('deactivate')) {
-          motion.call('deactivate');
+        if (motion.available('no-motion')) {
+          motion.call('no-motion');
         }
       } else {
-        if (motion.available('activate')) {
-          motion.call('activate');
+        if (motion.available('motion')) {
+          motion.call('motion');
         }
       }
       switch (newState.data) {

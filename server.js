@@ -4,6 +4,7 @@ var Photocell = require('zetta-photocell-stateful-mock-driver');
 var Security = require('zetta-security-mock-driver');
 var Door = require('zetta-door-mock-driver');
 var Window = require('zetta-window-mock-driver');
+var Motion = require('zetta-motion-mock-driver');
 var Thermometer = require('zetta-thermometer-mock-driver');
 var Camera = require('zetta-camera-mock-driver');
 var Robot = require('zetta-robot-mock-driver');
@@ -67,6 +68,7 @@ zetta()
   .use(Security)
   .use(Door)
   .use(Window)
+  .use(Motion)
   .use(Thermometer, {increment: thermometerIncrement})
   .use(Camera, cameraImage)
   .use(Robot)

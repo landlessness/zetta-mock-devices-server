@@ -34,19 +34,20 @@ var parseCommandLineColor = function(colorString) {
 };
 
 var styleProperties = { 
-      devices: [{
+      devices: {
         photocell: {
-          properties: [{
-            property: 'state',
-            display: 'none'
-          },{
-            property: 'intensity',
-            display: 'inline',
-            significantDigits: 3,
-            symbol: 'lx'
-          }]
+          properties: {
+            state: {
+              display: 'none'
+            },
+            intensity: {
+              display: 'inline',
+              significantDigits: 3,
+              symbol: 'lx'
+            }
+          }
         }
-      }]
+      }
     };
 
 if (argv['f']) {

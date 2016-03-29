@@ -58,7 +58,7 @@ module.exports = function(server) {
     });
   });
 
-  if (server.httpServer.zetta._name === 'denver') {
+  if (server.httpServer.zetta._name === 'neworleans') {
     var securityQuery = server.where({ type: 'security' });
     server.observe([securityQuery], function(security){
       // add property to track style

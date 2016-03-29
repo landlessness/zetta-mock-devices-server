@@ -22,7 +22,8 @@ module.exports = function(server) {
           if (tintMode !== 'original') {
             tintMode = 'template';
           }
-          device.style = extend(device.style, {stateImage: {url: imageURL, tintMode: tintMode}});
+          device.style = extend(true, device.style, {properties: {}});
+          device.style.properties = extend(true, device.style.properties, {stateImage: {url: imageURL, tintMode: tintMode}});
           cb();
         },
         fields: [
@@ -37,42 +38,32 @@ module.exports = function(server) {
         device.call('_update-state-image', stateImageForDevice(device), 'template');
       });
 
-      var hideUpdateStateImageAction = {
-        action: '_update-state-image',
-        display: 'none'
-      };
-      if (typeof device.style.actions === 'undefined' || device.style.actions.constructor !== Array) {
-        device.style.actions = [hideUpdateStateImageAction];
-      } else {
-        device.style.actions.push(hideUpdateStateImageAction);
-      }
-      
+      device.style.actions = extend(true, device.style.actions, {'_update-state-image': {display: 'none'}});
+
     });
   });
   
   var photocellQuery = server.where({ type: 'photocell' });
   server.observe([photocellQuery], function(photocell){
     // add property to track style
-    photocell.style.properties = [
-      {
-        property: 'intensity',
+    photocell.style.properties = extend(true, photocell.style.properties, {
+      intensity: {
         display: 'billboard',
         significantDigits: 3,
         symbol: 'lx'
       },
-      {
-        property: 'stateImage',
-        display: 'none'
+      stateImage: {
+        display: 'inline'
       }
-    ];
+    });
   });
 
   if (server.httpServer.zetta._name === 'denver') {
     var securityQuery = server.where({ type: 'security' });
     server.observe([securityQuery], function(security){
       // add property to track style
-      security.style.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
-      security.style.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
+      security.style.properties.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
+      security.style.properties.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
     });
   }
 

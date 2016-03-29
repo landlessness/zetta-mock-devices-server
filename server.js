@@ -34,7 +34,7 @@ var parseCommandLineColor = function(colorString) {
 };
 
 var styleProperties = { 
-      devices: {
+      entities: {
         photocell: {
           properties: {
             state: {

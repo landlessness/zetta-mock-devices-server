@@ -47,14 +47,15 @@ var styleProperties = {
             }
           }
         }
-      }
+      },
+      properties: {}
     };
 
 if (argv['f']) {
-  styleProperties = extend(styleProperties, {foregroundColor: parseCommandLineColor(argv['f'])});
+  styleProperties.properties = extend(true, styleProperties.properties, {foregroundColor: parseCommandLineColor(argv['f'])});
 }
 if (argv['b']) {
-  styleProperties = extend(styleProperties, {backgroundColor: parseCommandLineColor(argv['b'])});
+  styleProperties.properties = extend(true, styleProperties.properties, {backgroundColor: parseCommandLineColor(argv['b'])});
 }
 
 var cameraImage = argv['c'];

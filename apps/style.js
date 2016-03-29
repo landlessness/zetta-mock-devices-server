@@ -53,7 +53,7 @@ module.exports = function(server) {
         symbol: 'lx'
       },
       stateImage: {
-        display: 'inline'
+        display: 'none'
       }
     });
   });

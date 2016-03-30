@@ -18,24 +18,53 @@ module.exports = function(server) {
         device._allowed[states[i]].push('_update-state-image');
       }
       device._transitions['_update-state-image'] = {
-        handler: function(imageURL, tintMode, cb) {
+        handler: function(imageURL, tintMode, foregroundColor, cb) {
           if (tintMode !== 'original') {
             tintMode = 'template';
           }
           device.style = extend(true, device.style, {properties: {}});
-          device.style.properties = extend(true, device.style.properties, {stateImage: {url: imageURL, tintMode: tintMode}});
+          device.style.properties = extend(true, device.style.properties, {
+            stateImage: {
+              url: imageURL,
+              tintMode: tintMode
+            }
+          });
+          if (foregroundColor) {
+            device.style.properties.stateImage.foregroundColor = foregroundColor;
+          }
           cb();
         },
         fields: [
           {name: 'imageURL', type: 'text'},
-          {name: 'tintMode', type: 'text'}
+          {name: 'tintMode', type: 'text'},
+          {name: 'foregroundColor', type: 'text'}
         ]
       };
 
-      device.call('_update-state-image', stateImageForDevice(device), 'template');
+      device.call('_update-state-image', stateImageForDevice(device), 'template', null);
       var stateStream = device.createReadStream('state');
       stateStream.on('data', function(newState) {
-        device.call('_update-state-image', stateImageForDevice(device), 'template');
+        var foregroundColor = null;
+        console.log('hello: ' + util.inspect(device.type));
+        switch (device.type) {
+        case 'security':
+          switch (device.state) {
+          case 'disarmed':
+          case 'disarming':
+            foregroundColor = {hex: '#48A70C', decimal: {red: 72, green: 167, blue: 12}};
+            break;
+          case 'arming-stay':
+          case 'armed-stay':
+          case 'armed-away':
+          case 'arming-away':
+            foregroundColor = {hex: '#AD231B', decimal: {red: 173, green: 35, blue: 27}};
+            break;
+          default:
+          }
+          break;
+        default:
+        }
+        device.call('_update-state-image', stateImageForDevice(device), 'template', foregroundColor);
       });
 
       device.style.actions = extend(true, device.style.actions, {'_update-state-image': {display: 'none'}});
@@ -59,7 +88,7 @@ module.exports = function(server) {
   });
 
   if (server.httpServer.zetta._name === 'neworleans') {
-    var securityQuery = server.where({ type: 'security' });
+    var securityQuery = server.where({ type: 'thermometer' });
     server.observe([securityQuery], function(security){
       // add property to track style
       security.style.properties.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};

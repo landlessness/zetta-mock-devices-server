@@ -87,13 +87,39 @@ module.exports = function(server) {
     });
   });
 
+  var securityQuery = server.where({ type: 'security' });
+  server.observe([securityQuery], function(security){
+    // add property to track style
+    var redColor = {
+      backgroundColor: {hex: '#AD231B', decimal: {red: 173, green: 35, blue: 27}},
+      foregroundColor: {hex: '#FFFFFF', decimal: {red: 255, green: 255, blue: 255}}
+    };
+    security.style.actions = extend(true, security.style.actions, {
+      'disarm': {
+        backgroundColor: {hex: '#48A70C', decimal: {red: 72, green: 167, blue: 12}},
+        foregroundColor: {hex: '#FFFFFF', decimal: {red: 255, green: 255, blue: 255}}
+      },
+      'arm-stay': redColor,
+      'arm-away': redColor
+    });
+  });
+
   if (server.httpServer.zetta._name === 'neworleans') {
-    var securityQuery = server.where({ type: 'thermometer' });
-    server.observe([securityQuery], function(security){
+    var thermometerQuery = server.where({ type: 'thermometer' });
+    server.observe([thermometerQuery], function(thermometer){
       // add property to track style
-      security.style.properties.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
-      security.style.properties.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
+      thermometer.style.properties.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
+      thermometer.style.properties.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
+      thermometer.style.properties = extend(true, thermometer.style.properties, {
+        temperature: {
+          display: 'billboard',
+          significantDigits: 1,
+          symbol: '°F'
+        },
+        stateImage: {
+          display: 'none'
+        }
+      });
     });
   }
-
 }

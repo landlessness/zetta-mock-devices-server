@@ -46,6 +46,18 @@ var styleProperties = {
               symbol: 'lx'
             }
           }
+        },
+        thermometer: {
+          properties: {
+            state: {
+              display: 'none'
+            },
+            temperature: {
+              display: 'inline',
+              significantDigits: 1,
+              symbol: '°F'
+            }
+          }
         }
       },
       properties: {}

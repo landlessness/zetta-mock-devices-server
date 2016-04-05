@@ -104,22 +104,20 @@ module.exports = function(server) {
     });
   });
 
-  if (server.httpServer.zetta._name === 'neworleans') {
-    var thermometerQuery = server.where({ type: 'thermometer' });
-    server.observe([thermometerQuery], function(thermometer){
-      // add property to track style
-      thermometer.style.properties.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
-      thermometer.style.properties.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
-      thermometer.style.properties = extend(true, thermometer.style.properties, {
-        temperature: {
-          display: 'billboard',
-          significantDigits: 1,
-          symbol: '°F'
-        },
-        stateImage: {
-          display: 'none'
-        }
-      });
+  var thermometerQuery = server.where({ type: 'thermometer' });
+  server.observe([thermometerQuery], function(thermometer){
+    // add property to track style
+    thermometer.style.properties.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
+    thermometer.style.properties.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
+    thermometer.style.properties = extend(true, thermometer.style.properties, {
+      temperature: {
+        display: 'billboard',
+        significantDigits: 1,
+        symbol: '°F'
+      },
+      stateImage: {
+        display: 'none'
+      }
     });
-  }
+  });
 }

@@ -82,7 +82,7 @@ module.exports = function(server) {
         symbol: 'lx'
       },
       stateImage: {
-        display: 'none'
+        display: 'inline'
       }
     });
   });

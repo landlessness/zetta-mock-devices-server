@@ -35,34 +35,37 @@ var parseCommandLineColor = function(colorString) {
 };
 
 var styleProperties = { 
-      entities: {
-        photocell: {
-          properties: {
-            state: {
-              display: 'none'
-            },
-            intensity: {
-              display: 'inline',
-              significantDigits: 3,
-              symbol: 'lx'
-            }
-          }
+  entities: {
+    'glucose-meter': {
+      display: 'none',
+    },
+    photocell: {
+      properties: {
+        state: {
+          display: 'none'
         },
-        thermometer: {
-          properties: {
-            state: {
-              display: 'none'
-            },
-            temperature: {
-              display: 'inline',
-              significantDigits: 1,
-              symbol: '°F'
-            }
-          }
+        intensity: {
+          display: 'inline',
+          significantDigits: 3,
+          symbol: 'lx'
         }
-      },
-      properties: {}
-    };
+      }
+    },
+    thermometer: {
+      properties: {
+        state: {
+          display: 'none'
+        },
+        temperature: {
+          display: 'inline',
+          significantDigits: 1,
+          symbol: '°F'
+        }
+      }
+    }
+  },
+  properties: {}
+};
 
 if (argv['f']) {
   styleProperties.properties = extend(true, styleProperties.properties, {foregroundColor: parseCommandLineColor(argv['f'])});

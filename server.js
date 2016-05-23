@@ -8,6 +8,7 @@ var Motion = require('zetta-motion-mock-driver');
 var Thermometer = require('zetta-thermometer-mock-driver');
 var Camera = require('zetta-camera-mock-driver');
 var Robot = require('zetta-robot-mock-driver');
+var GlucoseMeter = require('zetta-glucose-meter-mock-driver');
 
 // Little Apps
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
@@ -87,6 +88,7 @@ zetta()
   .use(Thermometer, {increment: thermometerIncrement})
   .use(Camera, cameraImage)
   .use(Robot)
+  .use(GlucoseMeter)
   .use(duskToDawnLight)
   .use(style)
   .use(physics)

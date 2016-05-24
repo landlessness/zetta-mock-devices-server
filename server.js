@@ -6,6 +6,7 @@ var Door = require('zetta-door-mock-driver');
 var Window = require('zetta-window-mock-driver');
 var Motion = require('zetta-motion-mock-driver');
 var Thermometer = require('zetta-thermometer-mock-driver');
+var Thermostat = require('zetta-thermostat-mock-driver');
 var Camera = require('zetta-camera-mock-driver');
 var Robot = require('zetta-robot-mock-driver');
 var GlucoseMeter = require('zetta-glucose-meter-mock-driver');
@@ -89,6 +90,7 @@ zetta()
   .use(Window)
   .use(Motion)
   .use(Thermometer, {increment: thermometerIncrement})
+  .use(Thermostat)
   .use(Camera, cameraImage)
   .use(Robot)
   .use(GlucoseMeter)

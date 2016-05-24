@@ -10,7 +10,7 @@ var stateImageForDevice = function(device) {
 
 module.exports = function(server) {
   // TODO: swap with server.ql and text
-  ['security', 'door', 'window', 'motion', 'photocell', 'thermometer', 'robot'].forEach(function(deviceType){
+  ['security', 'door', 'window', 'motion', 'photocell', 'thermometer', 'robot', 'thermostat'].forEach(function(deviceType){
     var deviceQuery = server.where({type: deviceType});
     server.observe([deviceQuery], function(device) {
       var states = Object.keys(device._allowed);

@@ -10,6 +10,7 @@ var Thermostat = require('zetta-thermostat-mock-driver');
 var Camera = require('zetta-camera-mock-driver');
 var Robot = require('zetta-robot-mock-driver');
 var GlucoseMeter = require('zetta-glucose-meter-mock-driver');
+var Automobile = require('zetta-automobile-mock-driver');
 
 // Little Apps
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
@@ -49,6 +50,18 @@ var styleProperties = {
           display: 'inline',
           significantDigits: 3,
           symbol: 'lx'
+        }
+      }
+    },
+    automobile: {
+      properties: {
+        state: {
+          display: 'none'
+        },
+        vehicleSpeed: {
+          display: 'inline',
+          significantDigits: 1,
+          symbol: 'km/h'
         }
       }
     },
@@ -94,6 +107,7 @@ zetta()
   .use(Camera, cameraImage)
   .use(Robot)
   .use(GlucoseMeter)
+  .use(Automobile)
   .use(duskToDawnLight)
   .use(style)
   .use(physics)

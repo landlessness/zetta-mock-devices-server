@@ -10,7 +10,7 @@ var stateImageForDevice = function(device) {
 
 module.exports = function(server) {
   // TODO: swap with server.ql and text
-  ['security', 'door', 'window', 'motion', 'photocell', 'thermometer', 'robot', 'thermostat'].forEach(function(deviceType){
+  ['security', 'door', 'window', 'motion', 'photocell', 'thermometer', 'robot', 'thermostat', 'automobile'].forEach(function(deviceType){
     var deviceQuery = server.where({type: deviceType});
     server.observe([deviceQuery], function(device) {
       var states = Object.keys(device._allowed);
@@ -83,6 +83,18 @@ module.exports = function(server) {
       },
       stateImage: {
         display: 'inline'
+      }
+    });
+  });
+
+  var automobileQuery = server.where({ type: 'automobile' });
+  server.observe([automobileQuery], function(automobile){
+    // add property to track style
+    automobile.style.properties = extend(true, automobile.style.properties, {
+      vehicleSpeed: {
+        display: 'billboard',
+        significantDigits: 1,
+        symbol: 'km/h'
       }
     });
   });

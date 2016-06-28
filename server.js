@@ -10,6 +10,7 @@ var Thermostat = require('zetta-thermostat-mock-driver');
 var Camera = require('zetta-camera-mock-driver');
 var Robot = require('zetta-robot-mock-driver');
 var GlucoseMeter = require('zetta-glucose-meter-mock-driver');
+var InsulinPump = require('zetta-insulin-pump-mock-driver');
 var Automobile = require('zetta-automobile-mock-driver');
 
 // Little Apps
@@ -39,7 +40,28 @@ var parseCommandLineColor = function(colorString) {
 var styleProperties = { 
   entities: {
     'glucose-meter': {
-      display: 'none',
+      properties: {
+        state: {
+          display: 'none'
+        },
+        concentration: {
+          display: 'inline',
+          significantDigits: 1,
+          symbol: 'mg/dl'
+        }
+      }
+    },
+    'insulin-pump': {
+      properties: {
+        state: {
+          display: 'none'
+        },
+        concentration: {
+          display: 'inline',
+          significantDigits: 1,
+          symbol: 'mg/dl'
+        }
+      }
     },
     photocell: {
       properties: {
@@ -107,6 +129,7 @@ zetta()
   .use(Camera, cameraImage)
   .use(Robot)
   .use(GlucoseMeter)
+  .use(InsulinPump)
   .use(Automobile)
   .use(duskToDawnLight)
   .use(style)

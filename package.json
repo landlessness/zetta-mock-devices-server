@@ -29,7 +29,8 @@
     "zetta-thermometer-mock-driver": "~0.1.1",
     "zetta-thermostat-mock-driver": "~0.0.2",
     "zetta-camera-mock-driver": "~0.1.4",
-    "zetta-glucose-meter-mock-driver": "~0.0.2",
+    "zetta-glucose-meter-mock-driver": "~0.0.3",
+    "zetta-insulin-pump-mock-driver": "~0.0.1",
     "zetta-automobile-mock-driver": "~0.1.0",
     "zetta-robot-mock-driver": "~0.1.1"
   }

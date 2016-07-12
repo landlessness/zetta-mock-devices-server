@@ -8,7 +8,8 @@ var stateImageForDevice = function(device) {
   return IMAGE_URL_ROOT + device.type + '-' + device.state + IMAGE_EXTENSION;
 }
 
-module.exports = function(server) {
+module.exports = function(server, serverStyle) {
+  var serverStyle = serverStyle;
   // TODO: swap with server.ql and text
   ['security', 'door', 'window', 'motion', 'photocell', 'thermometer', 'robot', 'thermostat', 'automobile'].forEach(function(deviceType){
     var deviceQuery = server.where({type: deviceType});
@@ -119,8 +120,9 @@ module.exports = function(server) {
   var thermometerQuery = server.where({ type: 'thermometer' });
   server.observe([thermometerQuery], function(thermometer){
     // add property to track style
-    thermometer.style.properties.backgroundColor = {decimal: {red: 255, green: 0, blue: 0}, hex: '#FF0000'};
-    thermometer.style.properties.foregroundColor = {decimal: {red: 255, green: 255, blue: 255}, hex: '#FFFFFF'};
+    
+    thermometer.style.properties.backgroundColor = serverStyle.properties.foregroundColor;
+    thermometer.style.properties.foregroundColor = serverStyle.properties.backgroundColor;
     thermometer.style.properties = extend(true, thermometer.style.properties, {
       temperature: {
         display: 'billboard',

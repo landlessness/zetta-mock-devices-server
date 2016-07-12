@@ -132,7 +132,7 @@ zetta()
   .use(InsulinPump)
   .use(Automobile)
   .use(duskToDawnLight)
-  .use(style)
+  .use(style, styleProperties)
   .use(physics)
   .link(LINK_URL)
   .listen(PORT, function(){

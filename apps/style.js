@@ -120,10 +120,7 @@ module.exports = function(server, serverStyle) {
   var thermometerQuery = server.where({ type: 'thermometer' });
   server.observe([thermometerQuery], function(thermometer){
     // add property to track style
-    
-    thermometer.style.properties.backgroundColor = serverStyle.properties.foregroundColor;
-    thermometer.style.properties.foregroundColor = serverStyle.properties.backgroundColor;
-    thermometer.style.properties = extend(true, thermometer.style.properties, {
+        thermometer.style.properties = extend(true, thermometer.style.properties, {
       temperature: {
         display: 'billboard',
         significantDigits: 1,
@@ -134,4 +131,16 @@ module.exports = function(server, serverStyle) {
       }
     });
   });
+  
+  var porchLightQuery = server.where({name: 'Porch Light'});
+  server.observe([porchLightQuery], function(porchLight){
+    porchLight.style.properties.backgroundColor = serverStyle.properties.foregroundColor;
+    porchLight.style.properties.foregroundColor = serverStyle.properties.backgroundColor;
+  })
+  
+  var porchPhotocellQuery = server.where({name: 'Porch Photocell'});
+  server.observe([porchPhotocellQuery], function(porchPhotocell){
+    porchPhotocell.style.properties.backgroundColor = serverStyle.properties.foregroundColor;
+    porchPhotocell.style.properties.foregroundColor = serverStyle.properties.backgroundColor;
+  })
 }

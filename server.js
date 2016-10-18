@@ -12,6 +12,7 @@ var Robot = require('zetta-robot-mock-driver');
 var GlucoseMeter = require('zetta-glucose-meter-mock-driver');
 var InsulinPump = require('zetta-insulin-pump-mock-driver');
 var Automobile = require('zetta-automobile-mock-driver');
+var IndustrialMonitor = require('zetta-industrial-monitor-modbus-mock-driver')
 
 // Little Apps
 var duskToDawnLight = require('./apps/dusk_to_dawn_light');
@@ -63,6 +64,18 @@ var styleProperties = {
         }
       }
     },
+    'industrial-monitor': {
+      properties: {
+        state: {
+          display: 'none'
+        },
+        power: {
+          display: 'inline',
+          significantDigits: 2,
+          symbol: 'kW'
+        }
+      }
+    },
     photocell: {
       properties: {
         state: {
@@ -93,6 +106,18 @@ var styleProperties = {
           display: 'none'
         },
         temperature: {
+          display: 'inline',
+          significantDigits: 1,
+          symbol: '°F'
+        }
+      }
+    },
+    thermostat: {
+      properties: {
+        state: {
+          display: 'none'
+        },
+        setpoint: {
           display: 'inline',
           significantDigits: 1,
           symbol: '°F'
@@ -131,6 +156,7 @@ zetta()
   .use(GlucoseMeter)
   .use(InsulinPump)
   .use(Automobile)
+  .use(IndustrialMonitor)
   .use(duskToDawnLight)
   .use(style, styleProperties)
   .use(physics)

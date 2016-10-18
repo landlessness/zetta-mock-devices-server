@@ -20,6 +20,7 @@
     "node.extend": "^1.1.5",
     "minimist": "^1.2.0",
     "zetta": "^1.1.0",
+    "zetta-industrial-monitor-modbus-mock-driver": "~0.0.3",
     "zetta-light-mock-driver": "~0.1.3",
     "zetta-photocell-stateful-mock-driver": "~0.1.2",
     "zetta-security-mock-driver": "~0.1.1",
